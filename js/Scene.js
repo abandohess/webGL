@@ -9,6 +9,8 @@ let Scene = function(gl) {
 
   this.trianglePosition1 = new Vec3(0, 0, 0);
 
+  this.direction = .8;
+
   // this.trianglePosition2 = {x:0, y:0, z:0};
   this.timeAtLastFrame = new Date().getTime();
 };
@@ -17,9 +19,27 @@ Scene.prototype.update = function(gl, keysPressed) {
   let timeAtThisFrame = new Date().getTime();
   let dt = (timeAtThisFrame - this.timeAtLastFrame) / 1000.0;
   this.timeAtLastFrame = timeAtThisFrame;
-  var dx = 0.2 * dt;
-  var differenceVector = new Vec3(dx, 0, 0);
-  this.trianglePosition1.add(differenceVector);
+  var dx = this.direction * dt;
+  var dy = this.direction * dt;
+
+  if (keysPressed["LEFT"]) {
+    var differenceVector = new Vec3(-dx, 0, 0);
+    this.trianglePosition1.add(differenceVector);
+  }
+  else if (keysPressed["RIGHT"]) {
+    var differenceVector = new Vec3(dx, 0, 0);
+    this.trianglePosition1.add(differenceVector);
+  }
+  if (keysPressed["DOWN"]) {
+    var differenceVector = new Vec3(0, -dy, 0);
+    this.trianglePosition1.add(differenceVector);
+  }
+  else if (keysPressed["UP"]) {
+    var differenceVector = new Vec3(0, dy, 0);
+    this.trianglePosition1.add(differenceVector);
+  }
+
+  
 
   // clear the screen
   gl.clearColor(0.6, 0.0, 0.3, 1.0);
