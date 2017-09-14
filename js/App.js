@@ -60,7 +60,7 @@ App.prototype.update = function() {
 		// animate and draw scene
 		this.scene.update(this.gl);
 		this.overlay.innerHTML = "Ready.";
-		
+
 	} else {
 		this.overlay.innerHTML = "Loading: " + pendingResourceNames;
 	}
