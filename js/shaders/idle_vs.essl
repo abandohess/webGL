@@ -3,10 +3,10 @@ Shader.source[document.currentScript.src.split('js/shaders/')[1]] = `
 	attribute vec3 vertexColor;
 	varying vec4 varyingColor;
 
-	uniform vec3 trianglePosition1;
+	uniform mat4 modelViewProjMatrix;
 
 	void main(void) {
-		gl_Position = vec4(vertexPosition1 + trianglePosition1, 1);
+		gl_Position = vec4(vertexPosition1, 1) * modelViewProjMatrix;
 		varyingColor = vec4(vertexColor, 1);
 	}
 `;
